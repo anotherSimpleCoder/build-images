@@ -9,10 +9,10 @@ void setBuildStatus(String message, String state) {
 }
 
 pipeline {
+    agent any
+
     stages {
         stage('Build and push docker image') {
-            agent any
-
             script {
                 docker.withRegistry('https://ghcr.io', '6c946f9d-e780-4e81-918d-da3fa2f70934') {
                     def buildImage = docker.build('ghcr.io/anothersimplecoder/cpp_build_linux_x86_64:latest')
@@ -22,8 +22,6 @@ pipeline {
         }
 
         stage('Set GitHub status') {
-            agent any
-
             steps {
                 setBuildStatus("Test and Build complete", "SUCCESS");
             }
