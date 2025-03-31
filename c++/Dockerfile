@@ -1,3 +1,4 @@
 FROM ubuntu:latest
 USER root
-RUN apt install cmake clang build-essential
+RUN apt update && apt upgrade -y
+RUN apt install cmake clang build-essential -y
