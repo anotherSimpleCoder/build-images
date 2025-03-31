@@ -13,10 +13,12 @@ pipeline {
 
     stages {
         stage('Build and push docker image') {
-            script {
-                docker.withRegistry('https://ghcr.io', '6c946f9d-e780-4e81-918d-da3fa2f70934') {
-                    def buildImage = docker.build('ghcr.io/anothersimplecoder/cpp_build_linux_x86_64:latest')
-                    buildImage.push()
+            steps {
+                script {
+                    docker.withRegistry('https://ghcr.io', '6c946f9d-e780-4e81-918d-da3fa2f70934') {
+                        def buildImage = docker.build('ghcr.io/anothersimplecoder/cpp_build_linux_x86_64:latest')
+                        buildImage.push()
+                    }
                 }
             }
         }
